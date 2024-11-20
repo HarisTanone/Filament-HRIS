@@ -1,0 +1,14 @@
+<IfModule mod_headers.c>
+    # Mengizinkan CORS dari localhost dan 127.0.0.1
+    Header set Access-Control-Allow-Origin "http://localhost:8000"
+    Header set Access-Control-Allow-Origin "http://127.0.0.1:8000"
+
+    # Mengizinkan metode HTTP tertentu
+    Header set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+
+    # Mengizinkan header tertentu untuk request
+    Header set Access-Control-Allow-Headers "Content-Type, X-Requested-With, X-CSRF-TOKEN, Authorization"
+
+    # Menangani pre-flight request (untuk metode selain GET)
+    Header always set Access-Control-Max-Age "1000"
+</IfModule>
