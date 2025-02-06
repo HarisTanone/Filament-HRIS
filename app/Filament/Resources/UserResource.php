@@ -19,7 +19,6 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role as SpatieRole;
-use YourVendor\FilamentSortable\Components\SortableList;
 
 class UserResource extends Resource
 {
@@ -125,7 +124,6 @@ class UserResource extends Resource
                 TextColumn::make('name')
                     ->label('Name')
                     ->searchable()
-                    ->SortableList()
                     ->sortable(),
 
                 TextColumn::make('email')

@@ -10,7 +10,10 @@ use Dotswan\MapPicker\Fields\Map;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Tabs;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
@@ -241,6 +244,45 @@ class AttendanceResource extends Resource
                             'longitude_out' => $data['longitude_out'] ?? null,
                         ]);
                     }),
+                Action::make('view_attendance')
+                    ->label('Details')
+                    ->icon('heroicon-o-eye')
+                    ->modal()
+                    ->form(fn(Attendance $record) => [
+                        Tabs::make('Attendance Details')
+                            ->tabs([
+                                Tab::make('Clock In')
+                                    ->schema([
+                                        FileUpload::make('photo')
+                                            ->label('Foto Clock In')
+                                            ->image()
+                                            ->directory('attendance-photos')
+                                            ->default($record->photo) // Field untuk Clock In
+                                            ->disabled(),
+                                        Map::make('location')
+                                            ->showMarker()
+                                            ->default(fn() => ['lat' => $record->latitude, 'lng' => $record->longitude]) // Field untuk Clock In
+                                            ->zoom(16)
+                                            ->draggable(false)
+                                    ]),
+                                Tab::make('Clock Out')
+                                    ->schema([
+                                        FileUpload::make('photo_out') // Field untuk Clock Out
+                                            ->label('Foto Clock Out')
+                                            ->image()
+                                            ->directory('attendance-photos')
+                                            ->default($record->photo_out) // Field untuk Clock Out
+                                            ->disabled(),
+                                        Map::make('location_out') // Field untuk Clock Out
+                                            ->showMarker()
+                                            ->default(fn() => ['lat' => $record->latitude_out, 'lng' => $record->longitude_out]) // Field untuk Clock Out
+                                            ->zoom(16)
+                                            ->draggable(false)
+                                    ]),
+                            ]),
+                    ])->modalSubmitAction(false),
+
+                // ->action(fn(Attendance $record) => null),
             ])->filters([
                     // Filter::make('created_at')
                     //     ->form([
