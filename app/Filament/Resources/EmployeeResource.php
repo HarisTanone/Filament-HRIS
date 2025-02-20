@@ -174,7 +174,7 @@ class EmployeeResource extends Resource
                             ->relationship('manager', 'full_name')
                             ->placeholder('Pilih Manajer')
                             ->visible(fn() => auth()->user() && auth()->user()->hasAnyRole(['administrator', 'hrd']))
-                            ->required()
+                            // ->required()
                             ->label('Manager')
                             ->columnSpan(1),
 

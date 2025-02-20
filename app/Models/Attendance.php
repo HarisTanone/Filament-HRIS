@@ -25,7 +25,8 @@ class Attendance extends Model
         'longitude_out',
         'photo_out',
         'schedule_id',
-        'attendance_notes'
+        'attendance_notes',
+        'location_verified_clockOut'
     ];
 
     // Relasi dengan Schedule

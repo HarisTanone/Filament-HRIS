@@ -26,7 +26,8 @@ class AuthController extends Controller
             ]);
         }
 
-        $token = $user->createToken('YourAppName')->plainTextToken;
+        $token = $user->createToken('AuthToken')->plainTextToken;
+        \Log::info("Login berhasil untuk: {$user->email}, Role: {$user->role}, Token: $token");
 
         return response()->json([
             'message' => 'Login successful',
